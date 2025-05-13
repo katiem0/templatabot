@@ -1,0 +1,20 @@
+# Development files
+.env
+.env.*
+.git/
+.github/
+test/
+coverage/
+.gitignore
+.npmignore
+*.log
+node_modules/
+
+# Docker related files
+Dockerfile
+.dockerignore
+
+# Config files
+jest.config.js
+.eslintrc
+.prettierrc
