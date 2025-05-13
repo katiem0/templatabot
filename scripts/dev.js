@@ -7,6 +7,9 @@ require('dotenv').config();
 const SmeeClient = require('smee-client');
 const { exec } = require('child_process');
 
+// Set NODE_ENV to development
+process.env.NODE_ENV = 'development';
+
 // Default to smee.io if no webhook proxy URL is specified
 const webhookProxyUrl = process.env.WEBHOOK_PROXY_URL || 'https://smee.io/new';
 
@@ -21,8 +24,8 @@ console.log('Starting webhook forwarding from', webhookProxyUrl);
 const events = smee.start();
 
 // Start the app with nodemon for auto-reloading
-console.log('Starting the app...');
-const app = exec('nodemon --inspect index.js');
+console.log('Starting the app in development mode...');
+const app = exec('NODE_ENV=development nodemon --inspect index.js');
 
 // Forward stdout and stderr to console
 app.stdout.on('data', console.log);
@@ -49,6 +52,7 @@ TemplateBot Development Server
 • App URL: http://localhost:${process.env.PORT || 3000}
 • Webhook Forwarding URL: ${webhookProxyUrl}
 • GitHub App Webhook URL: ${webhookProxyUrl}
+• Webhook Signature Verification: DISABLED (development mode)
 
 Use the Webhook Forwarding URL in your GitHub App settings.
 Press Ctrl+C to exit.
