@@ -1,8 +1,8 @@
-FROM node:18-slim
+FROM node:18-alpine
 
-LABEL org.opencontainers.image.title="TemplateBot"
+LABEL org.opencontainers.image.title="TemplataBot"
 LABEL org.opencontainers.image.description="GitHub App for propagating template repository changes"
-LABEL org.opencontainers.image.source="https://github.com/yourusername/templatebot"
+LABEL org.opencontainers.image.source="https://github.com/yourusername/templatabot"
 
 WORKDIR /app
 

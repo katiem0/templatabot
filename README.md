@@ -1,21 +1,21 @@
-# TemplateBot
+# TemplataBot
 
 A GitHub App that listens for changes on template repositories and propagates those changes to repositories that use the templates.
 
 ## How It Works
 
-1. TemplateBot tracks which repositories were created from template repositories using GitHub repository topics.
-2. When changes are pushed to a template repository, TemplateBot identifies all repositories using that template.
-3. For each repository using the template, TemplateBot:
+1. TemplataBot tracks which repositories were created from template repositories using a GitHub repository custom property (default: `template-repo`).
+2. When changes are pushed to the default branch of a template repository, TemplataBot identifies all repositories in the same organization that have this custom property set to the template's name.
+3. For each repository using the template, TemplataBot:
    - Creates a new branch
    - Applies the template changes to that branch
    - Opens a Pull Request for review
 
 ## Features
 
-- Automatically detects when repositories are created from templates
-- Tracks template-repository relationships using GitHub repository topics
-- Propagates changes from templates to derived repositories
+- Automatically detects when repositories are created from templates (and can register them if the custom property is defined in the organization).
+- Tracks template-repository relationships using GitHub repository custom properties.
+- Propagates changes from templates to derived repositories.
 - Creates PRs for review rather than direct commits
 - Handles multiple repositories derived from the same template
 
@@ -41,14 +41,16 @@ A GitHub App that listens for changes on template repositories and propagates th
 ### Creating the GitHub App
 
 1. Create a new GitHub App at: https://github.com/settings/apps/new
-2. Set the following permissions:
-   - Repository contents: Read & write
-   - Repository metadata: Read-only
-   - Pull requests: Read & write
-   - Topics: Read & write
-3. Subscribe to the following events:
+2. Set the following **Repository permissions**:
+   - Contents: Read & write (to read template files, create branches, and commit changes)
+   - Metadata: Read-only (to access repository information)
+   - Pull requests: Read & write (to create pull requests)
+   - **Custom properties**: Read & write (to read and set the template tracking property)
+3. Set the following **Organization permissions**:
+   - **Custom properties**: Read-only (to check if the custom property definition exists)
+4. Subscribe to the following events:
    - `push`
-   - `repository`
+   - `repository` (for the `created` event)
 4. Generate a private key and download it
 5. Update your `.env` file with:
    - `APP_ID`: Your GitHub App ID
@@ -66,6 +68,22 @@ For production:
 ```
 npm start
 ```
+
+### Deploying with Docker
+
+You can build and run TemplataBot using Docker:
+
+1.  **Build the Docker image:**
+    ```sh
+    docker build -t templatabot .
+    ```
+
+2.  **Run the Docker container:**
+    Make sure to pass your environment variables from your `.env` file to the container.
+    ```sh
+    docker run -d --env-file .env -p 3000:3000 --name templatabot templatabot
+    ```
+    This will run the app in detached mode on port 3000.
 
 ## Development
 

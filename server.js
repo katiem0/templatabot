@@ -1,21 +1,21 @@
 /**
- * TemplateBot - Server implementation
+ * TemplataBot - Server implementation
  *
  * This file provides middleware setup for the GitHub App
  */
 
-require('dotenv').config();
 const { createNodeMiddleware, createProbot } = require('probot');
 const app = require('./src/app');
+const config = require('./config/config');
 
 // Determine if we're in development mode
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 // Create a Probot instance with appropriate configuration
 const probot = createProbot({
-  appId: process.env.APP_ID,
-  privateKey: process.env.PRIVATE_KEY,
-  secret: isDevelopment ? undefined : process.env.WEBHOOK_SECRET,
+  appId: config.github.appId,
+  privateKey: config.github.privateKey,
+  secret: isDevelopment ? undefined : config.github.webhookSecret,
 });
 
 // Load the app into the Probot instance
@@ -24,7 +24,7 @@ probot.load(app);
 // Configure middleware options
 const middlewareOptions = {
   probot,
-  webhooksPath: '/api/github/webhooks'
+  webhooksPath: config.server.webhookPath
 };
 
 // In development mode, disable signature verification

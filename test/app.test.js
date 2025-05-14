@@ -7,7 +7,7 @@ const { repoUpdater } = require('../lib/repo-updater');
 jest.mock('../lib/template-manager');
 jest.mock('../lib/repo-updater');
 
-describe('TemplateBot', () => {
+describe('TemplataBot', () => {
   let probot;
 
   beforeEach(() => {
@@ -19,9 +19,9 @@ describe('TemplateBot', () => {
         throttle: { enabled: false },
       }),
     });
-    
+
     probot.load(app);
-    
+
     // Reset mocks before each test
     jest.clearAllMocks();
   });
@@ -66,10 +66,10 @@ describe('TemplateBot', () => {
     });
 
     expect(templateManager.getRepositoriesUsingTemplate).toHaveBeenCalledWith(
-      expect.anything(), 
+      expect.anything(),
       123
     );
-    
+
     expect(repoUpdater.propagateChanges).toHaveBeenCalledTimes(2);
   });
 

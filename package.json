@@ -1,5 +1,5 @@
 {
-  "name": "templatebot",
+  "name": "templatabot",
   "version": "1.0.0",
   "description": "GitHub App that listens for changes on template repos and propagates them to repos created from the template",
   "main": "index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/km-allthethings/templatebot.git"
+    "url": "git+https://github.com/katiem0/templatabot.git"
   },
   "keywords": [
     "github",
@@ -25,9 +25,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/km-allthethings/templatebot/issues"
+    "url": "https://github.com/katiem0/templatabot/issues"
   },
-  "homepage": "https://github.com/km-allthethings/templatebot#readme",
+  "homepage": "https://github.com/katiem0/templatabot#readme",
   "engines": {
     "node": ">=16"
   },

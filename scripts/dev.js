@@ -47,7 +47,7 @@ process.on('SIGINT', () => {
 });
 
 console.log(`
-TemplateBot Development Server
+TemplataBot Development Server
 ------------------------------
 • App URL: http://localhost:${process.env.PORT || 3000}
 • Webhook Forwarding URL: ${webhookProxyUrl}

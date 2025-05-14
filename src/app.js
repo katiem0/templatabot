@@ -1,5 +1,5 @@
 /**
- * TemplateBot - A GitHub App that propagates changes from template repositories to repositories that use them
+ * TemplataBot - A GitHub App that propagates changes from template repositories to repositories that use them
  */
 const { templateManager } = require('../lib/template-manager');
 const { repoUpdater } = require('../lib/repo-updater');
@@ -8,7 +8,7 @@ const { repoUpdater } = require('../lib/repo-updater');
  * @param {Probot} app - Probot's main application class
  */
 module.exports = (app) => {
-  app.log.info('TemplateBot started!');
+  app.log.info('TemplataBot started!');
 
   // Listen for pushes to template repositories
   app.on('push', async (context) => {
